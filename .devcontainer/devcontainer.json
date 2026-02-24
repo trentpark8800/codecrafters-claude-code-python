@@ -1,0 +1,26 @@
+{
+  "name": "BYO Claude Python Environment",
+  "build": {
+    "dockerfile": "../Dockerfile"
+  },
+  "workspaceFolder": "/home/codecrafters-claude-code-python",
+  "remoteUser": "coder",
+    "mounts": [
+        {
+            "source": "${localWorkspaceFolder}",
+            "target": "/home/codecrafters-claude-code-python",
+            "type": "bind"
+        }
+    ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-vscode.vscode-json"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+      }
+    }
+}
