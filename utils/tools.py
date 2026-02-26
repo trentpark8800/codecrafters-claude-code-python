@@ -24,7 +24,7 @@ def read_file(file_path: str) -> None:
         file_content = f.readlines()
     
     for line in file_content:
-        print(line.strip())
+        print(line.strip(r"\n"))
 
 
 def tool_map(name: str) -> callable:
