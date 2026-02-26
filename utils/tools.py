@@ -16,3 +16,20 @@ class Tools(Enum):
             },
         },
     }
+
+
+def read_file(file_path: str) -> None:
+
+    with open(file_path, "rb") as f:
+        file_content = f.read()
+    
+    print(file_content)
+
+
+def tool_map(name: str) -> callable:
+
+    mapper = {
+        "Read": read_file
+    }
+
+    return mapper[name]
