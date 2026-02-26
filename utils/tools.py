@@ -23,7 +23,7 @@ def read_file(file_path: str) -> None:
     with open(file_path, "r") as f:
         file_content = f.read()
     
-    print(file_content)
+    print(file_content.strip())
 
 
 def tool_map(name: str) -> callable:
