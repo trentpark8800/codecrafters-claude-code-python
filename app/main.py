@@ -20,7 +20,7 @@ def _tool_call_handler(tool_calls):
 
 def response(choices) -> None:
 
-    print(choices[0].message.content)
+    print(choices[0].message.content, end=None)
 
     tool_calls = choices[0].message.tool_calls
 
