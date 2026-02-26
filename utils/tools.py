@@ -21,9 +21,10 @@ class Tools(Enum):
 def read_file(file_path: str) -> None:
 
     with open(file_path, "r") as f:
-        file_content = f.read()
+        file_content = f.readlines()
     
-    print(file_content.strip())
+    for line in file_content:
+        print(line.strip())
 
 
 def tool_map(name: str) -> callable:
