@@ -20,13 +20,13 @@ def _tool_call_handler(tool_calls):
 
 def response(choices) -> None:
 
-    print(choices[0].message.content, end=None)
-
     tool_calls = choices[0].message.tool_calls
 
     if tool_calls:
         _tool_call_handler(tool_calls)
-
+    else:
+        print(choices[0].message.content)
+        
 
 def main():
     p = argparse.ArgumentParser()
