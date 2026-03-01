@@ -77,7 +77,7 @@ def agent_loop(client: OpenAI, prompt: str):
         chat: Completion = client.chat.completions.create(
             model="anthropic/claude-haiku-4.5",
             messages=messages,
-            tools=[Tools.READ.value, Tools.WRITE.value],
+            tools=[Tools.READ.value, Tools.WRITE.value, Tools.BASH.value],
         )
 
         choices: List[CompletionChoice] = chat.choices

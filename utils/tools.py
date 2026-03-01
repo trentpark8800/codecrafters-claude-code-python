@@ -1,6 +1,9 @@
 from enum import Enum
 import sys
+import subprocess
+from json import loads
 from typing import Dict
+from subprocess import CompletedProcess
 
 
 class Tools(Enum):
@@ -21,23 +24,39 @@ class Tools(Enum):
             },
         },
     }
-    WRITE = {
+    WRITE = (
+        {
+            "type": "function",
+            "function": {
+                "name": "Write",
+                "description": "Write content to a file",
+                "parameters": {
+                    "type": "object",
+                    "required": ["file_path", "content"],
+                    "properties": {
+                        "file_path": {
+                            "type": "string",
+                            "description": "The path of the file to write to",
+                        },
+                        "content": {
+                            "type": "string",
+                            "description": "The content to write to the file",
+                        },
+                    },
+                },
+            },
+        },
+    )
+    BASH = {
         "type": "function",
         "function": {
-            "name": "Write",
-            "description": "Write content to a file",
+            "name": "Bash",
+            "description": "Execute a shell command",
             "parameters": {
                 "type": "object",
-                "required": ["file_path", "content"],
+                "required": ["command"],
                 "properties": {
-                    "file_path": {
-                        "type": "string",
-                        "description": "The path of the file to write to",
-                    },
-                    "content": {
-                        "type": "string",
-                        "description": "The content to write to the file",
-                    },
+                    "command": {"type": "string", "description": "The command to execute"}
                 },
             },
         },
@@ -69,6 +88,18 @@ def write_file(file_path: str, content: str) -> str:
     except Exception as e:
         print(e, file=sys.stderr)
 
+        return e
+
+
+def execute_bash(command: str) -> str:
+
+    try:
+        result: CompletedProcess = subprocess.run(loads(command))
+
+        return result.stdout
+
+    except Exception as e:
+        print(e, file=sys.stderr)
         return e
 
 
