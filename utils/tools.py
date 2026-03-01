@@ -94,7 +94,7 @@ def write_file(file_path: str, content: str) -> str:
 def execute_bash(command: str) -> str:
 
     try:
-        result: CompletedProcess = subprocess.run(loads(command))
+        result: CompletedProcess = subprocess.run(command)
 
         return result.stdout
 
@@ -108,6 +108,7 @@ def tool_map(name: str) -> callable:
     mapper = {
         "Read": read_file,
         "Write": write_file,
+        "Bash": execute_bash,
     }
 
     return mapper[name]
