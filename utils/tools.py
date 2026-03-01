@@ -1,4 +1,6 @@
 from enum import Enum
+import sys
+from typing import Dict
 
 
 class Tools(Enum):
@@ -18,12 +20,18 @@ class Tools(Enum):
     }
 
 
-def read_file(file_path: str) -> None:
+def read_file(file_path: str) -> str:
 
-    with open(file_path, "r") as f:
-        file_content = f.read()
-    
-    print(file_content)
+    try:
+        with open(file_path, "r") as f:
+            file_content = f.read()
+        
+        return file_content
+
+    except FileNotFoundError as e:
+        print(e, file=sys.stderr)
+
+        return e
 
 
 def tool_map(name: str) -> callable:
