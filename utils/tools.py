@@ -76,6 +76,9 @@ def write_file(file_path: str, content: str) -> str:
 
 def tool_map(name: str) -> callable:
 
-    mapper = {"Read": read_file}
+    mapper = {
+        "Read": read_file,
+        "Write": write_file,
+    }
 
     return mapper[name]
