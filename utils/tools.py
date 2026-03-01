@@ -60,6 +60,20 @@ def read_file(file_path: str) -> str:
         return e
 
 
+def write_file(file_path: str, content: str) -> str:
+
+    try:
+        with open(file_path, "w+") as f:
+            f.write(content)
+
+        return f"Successful write to {file_path}"
+
+    except Exception as e:
+        print(e, file=sys.stderr)
+
+        return e
+
+
 def tool_map(name: str) -> callable:
 
     mapper = {"Read": read_file}
