@@ -42,10 +42,13 @@ def _tool_call_handler(tool_calls) -> List[Dict]:
 
     tool_responses: List[Dict] = []
     for call in tool_calls:
-        tool_function: callable = tool_map(call.function.name)
-        tool_result = tool_function(**loads(call.function.arguments))
+        try:
+            tool_function: callable = tool_map(call.function.name)
+            tool_result = tool_function(**loads(call.function.arguments))
 
-        tool_responses.append({"role": "tool", "tool_call_id": call.id, "content": tool_result})
+            tool_responses.append({"role": "tool", "tool_call_id": call.id, "content": tool_result})
+        except KeyError as e:
+            print(f"Tool {call.function.name} not mapped: {e}", file=sys.stderr)
 
     return tool_responses
 
