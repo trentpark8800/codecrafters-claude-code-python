@@ -14,7 +14,7 @@ BASE_URL = os.getenv("OPENROUTER_BASE_URL", default="https://openrouter.ai/api/v
 
 
 def _message_handler(choice: CompletionChoice) -> Dict:
-    
+
     message = {
         "role": choice.message.role,
         "content": choice.message.content,
@@ -30,7 +30,7 @@ def _message_handler(choice: CompletionChoice) -> Dict:
                     "function": {
                         "name": call.function.name,
                         "arguments": call.function.arguments,
-                    }
+                    },
                 }
             )
 
@@ -44,14 +44,8 @@ def _tool_call_handler(tool_calls) -> List[Dict]:
         tool_function: callable = tool_map(call.function.name)
         tool_result = tool_function(**eval(call.function.arguments))
 
-        tool_responses.append(
-            {
-                "role": "tool",
-                "tool_call_id": call.id,
-                "content": tool_result
-            }
-        )
-    
+        tool_responses.append({"role": "tool", "tool_call_id": call.id, "content": tool_result})
+
     return tool_responses
 
 
@@ -77,9 +71,7 @@ def agent_loop(client: OpenAI, prompt: str):
     while execute_loop:
 
         chat: Completion = client.chat.completions.create(
-            model="anthropic/claude-haiku-4.5",
-            messages=messages,
-            tools=[Tools.READ.value]
+            model="anthropic/claude-haiku-4.5", messages=messages, tools=[Tools.READ.value]
         )
 
         choices: List[CompletionChoice] = chat.choices
@@ -90,10 +82,11 @@ def agent_loop(client: OpenAI, prompt: str):
         finish_reason, responses = parse_response(choices)
 
         messages.extend(responses)
-        if finish_reason == "stop": execute_loop = False
+        if finish_reason == "stop":
+            execute_loop = False
 
     return messages
-        
+
 
 def main():
     p = argparse.ArgumentParser()
