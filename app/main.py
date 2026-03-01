@@ -1,6 +1,7 @@
 import argparse
 import os
 import sys
+from json import loads
 from typing import Dict, List, Tuple
 from dotenv import load_dotenv
 
@@ -42,7 +43,7 @@ def _tool_call_handler(tool_calls) -> List[Dict]:
     tool_responses: List[Dict] = []
     for call in tool_calls:
         tool_function: callable = tool_map(call.function.name)
-        tool_result = tool_function(**eval(call.function.arguments))
+        tool_result = tool_function(**loads(call.function.arguments))
 
         tool_responses.append({"role": "tool", "tool_call_id": call.id, "content": tool_result})
 
