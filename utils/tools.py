@@ -93,9 +93,14 @@ def execute_bash(command: str) -> str:
 
     try:
         command_list: List[str] = command.split(" ")
-        result: CompletedProcess = subprocess.run(command_list)
+        result: CompletedProcess = subprocess.run(command_list, capture_output=True)
 
-        return result.stdout
+        if result.stdout is None:
+            result_value = ""
+        else:
+            result_value = result.stdout
+
+        return result_value
 
     except Exception as e:
         print(e, file=sys.stderr)
