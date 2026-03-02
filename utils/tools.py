@@ -24,8 +24,7 @@ class Tools(Enum):
             },
         },
     }
-    WRITE = (
-        {
+    WRITE = {
             "type": "function",
             "function": {
                 "name": "Write",
@@ -46,7 +45,6 @@ class Tools(Enum):
                 },
             },
         },
-    )
     BASH = {
         "type": "function",
         "function": {
