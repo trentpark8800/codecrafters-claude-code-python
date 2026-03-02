@@ -98,7 +98,7 @@ def execute_bash(command: str) -> str:
         if result.stdout is None:
             result_value = ""
         else:
-            result_value = result.stdout
+            result_value = result.stdout.decode('utf-8')
 
         return result_value
 
