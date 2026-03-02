@@ -8,22 +8,22 @@ from subprocess import CompletedProcess
 
 class Tools(Enum):
     READ = {
-        "type": "function",
-        "function": {
-            "name": "Read",
-            "description": "Read and return the contents of a file",
-            "parameters": {
-                "type": "object",
-                "properties": {
-                    "file_path": {
-                        "type": "string",
-                        "description": "The path to the file to read",
-                    }
+            "type": "function",
+            "function": {
+                "name": "Read",
+                "description": "Read and return the contents of a file",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "file_path": {
+                            "type": "string",
+                            "description": "The path to the file to read",
+                        }
+                    },
+                    "required": ["file_path"],
                 },
-                "required": ["file_path"],
             },
-        },
-    }
+        }
     WRITE = {
             "type": "function",
             "function": {
@@ -44,7 +44,7 @@ class Tools(Enum):
                     },
                 },
             },
-        },
+        }
     BASH = {
         "type": "function",
         "function": {
