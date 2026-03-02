@@ -1,8 +1,7 @@
 from enum import Enum
 import sys
 import subprocess
-from json import loads
-from typing import Dict, List
+from typing import List
 from subprocess import CompletedProcess
 
 
