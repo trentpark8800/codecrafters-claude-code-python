@@ -2,7 +2,7 @@ from enum import Enum
 import sys
 import subprocess
 from json import loads
-from typing import Dict
+from typing import Dict, List
 from subprocess import CompletedProcess
 
 
@@ -94,7 +94,8 @@ def write_file(file_path: str, content: str) -> str:
 def execute_bash(command: str) -> str:
 
     try:
-        result: CompletedProcess = subprocess.run(command)
+        command_list: List[str] = command.split(" ")
+        result: CompletedProcess = subprocess.run(command_list)
 
         return result.stdout
 
